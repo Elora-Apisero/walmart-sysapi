@@ -101,7 +101,7 @@
 		<dependency>
 			<groupId>com.mycompany</groupId>
 			<artifactId>mysql-connector-java-8.0.16</artifactId>
-			<version>0.1</version>
+			<version>8.0.16</version>
 		</dependency>
 		<dependency>
 			<groupId>com.mulesoft.munit</groupId>
@@ -151,18 +151,18 @@
 			<url>https://repository.mulesoft.org/releases/</url>
 			<layout>default</layout>
 		</repository>
-		<repository>
+		<!-- <repository>
 			<id>anypoint-exchange-v2</id>
 			<name>Anypoint Exchange</name>
 			<url>https://maven.anypoint.mulesoft.com/api/v2/maven</url>
 			<layout>default</layout>
-		</repository>
-		<repository>
+		</repository>-->
+		<!--<repository>
 			<id>exchange-v2</id>
 			<name>Anypoint Platform Exchange Repository</name>
 			<url>https://maven.anypoint.mulesoft.com/api/v2/organizations/a2eb2203-b39e-48ef-b8be-dbaf0d8f658a/maven</url>
 			<layout>default</layout>
-		</repository>
+		</repository>-->
 	</repositories>
 
 	<pluginRepositories>

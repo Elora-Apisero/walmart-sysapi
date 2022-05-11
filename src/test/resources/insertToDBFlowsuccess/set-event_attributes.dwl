@@ -1,0 +1,30 @@
+{
+  "headers": {
+    "x-rapidapi-host": "walmart.p.rapidapi.com",
+    "x-rapidapi-key": "bb3c9ccf6bmsh57d8fc4aad90698p128d5djsn26c9cc157c7d",
+    "content-type": "application/json",
+    "user-agent": "PostmanRuntime/7.29.0",
+    "accept": "*/*",
+    "postman-token": "88279f38-d7e6-4c16-a18a-eb04d1baa3c9",
+    "host": "localhost:8081",
+    "accept-encoding": "gzip, deflate, br",
+    "connection": "keep-alive",
+    "content-length": "206"
+  },
+  "clientCertificate": null,
+  "method": "POST",
+  "scheme": "http",
+  "queryParams": {},
+  "requestUri": "/db",
+  "queryString": "",
+  "version": "HTTP/1.1",
+  "maskedRequestPath": null,
+  "listenerPath": "/db",
+  "localAddress": "/127.0.0.1:8081",
+  "relativePath": "/db",
+  "uriParams": {},
+  "rawRequestUri": "/db",
+  "rawRequestPath": "/db",
+  "remoteAddress": "/127.0.0.1:51766",
+  "requestPath": "/db"
+}

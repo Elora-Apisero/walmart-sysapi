@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="insertToDBFlow" doc:id="a5dc04b6-f295-40cc-a2cc-7123c8b0ce09" >
+		<logger level="INFO" doc:name="Starting insertToDBFlow" doc:id="9d597818-44e0-43ca-ab9b-fdbe4407b5c9" message="Starting /insertToDBFlow"/>
+		<db:insert doc:name="Insert to DB" doc:id="e1e6f66a-41ce-43dc-9514-70628e4e50da" config-ref="Database_Config">
+			<db:sql ><![CDATA[INSERT INTO 
+walmart_best 
+(store_id,store_name,store_address,store_distance,store_contact_number,product_type_id,quantity) 
+VALUES 
+(:store_id, :store_name, :store_address, :store_distance, :store_contact_number, :product_type_id, :quantity)]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+'store_id': payload.store_id,
+'store_name': payload.store_name,
+'store_address': payload.store_address,
+'store_distance': payload.store_distance,
+'store_contact_number': payload.store_contact_number,
+'product_type_id': payload.product_type_id,
+'quantity': payload.quantity
+}]]]></db:input-parameters>
+		</db:insert>
+		<db:select doc:name="Select Last Entry" doc:id="345c96d6-b387-4597-84f0-b6c6ffb8f98f" config-ref="Database_Config">
+			<db:sql ><![CDATA[SELECT MAX(order_id) FROM walmart_best]]></db:sql>
+		</db:select>
+		<ee:transform doc:name="Response Message" doc:id="0884a278-f05b-4010-b743-aff50212ff2f" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"Order_Id": payload."MAX(order_id)"[0],
+	"Message": "Record Inserted Successfully."
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Ending insertToDBFlowpayload" doc:id="ed4e2141-80fd-42b0-8173-a395720034ca" message="Ending /insertToDBFlowpayload"/>
+	</flow>
+</mule>

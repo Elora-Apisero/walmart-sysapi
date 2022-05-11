@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="walmart-db-suite.xml" />
+	<munit:test name="insertToDBFlow-success" doc:id="7184b90b-05d4-41b7-9f3e-bcf737ab57c3" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Insert to DB" doc:id="715922ed-de31-4566-95f2-07b9b2932fc0" processor="db:insert">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="e1e6f66a-41ce-43dc-9514-70628e4e50da" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://insertToDBFlowsuccess/mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Select Last Entry" doc:id="3440d805-e26a-41f3-a036-7211f48cef9f" processor="db:select">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="345c96d6-b387-4597-84f0-b6c6ffb8f98f" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://insertToDBFlowsuccess/mock_payload1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:spy doc:name="Spy Response Message" doc:id="6beb8b53-b322-4814-b029-9bcb76dbbbca" processor="ee:transform">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="0884a278-f05b-4010-b743-aff50212ff2f" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:before-call >
+					<munit-tools:assert doc:name="Assert payload" doc:id="db1b15f7-90ef-4372-9428-c4fc0640a295" message="The payload does not match">
+						<munit-tools:that ><![CDATA[#[%dw 2.0
+import insertToDBFlowsuccess::spy_assert_payload
+---
+spy_assert_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+					</munit-tools:assert>
+				</munit-tools:before-call>
+				<munit-tools:after-call >
+					<munit-tools:assert doc:name="Assert payload" doc:id="199089cd-d8d9-4aad-a38c-646f79629492" message="The payload does not match">
+						<munit-tools:that ><![CDATA[#[%dw 2.0
+import insertToDBFlowsuccess::spy_assert_payload1
+---
+spy_assert_payload1::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+					</munit-tools:assert>
+				</munit-tools:after-call>
+			</munit-tools:spy>
+			<munit:set-event doc:name="Set Input" doc:id="35f89f04-99df-4d84-a6cc-f6996e5c16c9" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://insertToDBFlowsuccess/set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://insertToDBFlowsuccess/set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to insertToDBFlow" doc:id="baf1baa4-c2d3-4203-b288-0817d9e833d1" name="insertToDBFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="5561add3-b532-4828-bbf9-104fc2b4a2cf" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import insertToDBFlowsuccess::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+			<munit-tools:verify-call doc:name="Verify Starting insertToDBFlow" doc:id="cb1eca7e-3194-4094-b351-c7d858afce87" processor="logger" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="9d597818-44e0-43ca-ab9b-fdbe4407b5c9" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Ending insertToDBFlowpayload" doc:id="2d588403-bc85-4c38-a5da-3643f1dfece9" processor="logger" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="ed4e2141-80fd-42b0-8173-a395720034ca" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Response Message" doc:id="02593f69-659b-4e28-acf6-231085790f69" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="0884a278-f05b-4010-b743-aff50212ff2f" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+</mule>

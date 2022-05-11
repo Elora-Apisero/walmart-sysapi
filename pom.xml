@@ -41,7 +41,7 @@
 					<cloudHubDeployment>
 						<uri>https://anypoint.mulesoft.com</uri>
 						<muleVersion>4.4.0</muleVersion>
-						<businessGroupId>bc3294e5-8e64-43af-aa37-e7857ca207dd</businessGroupId>
+						<businessGroupId>a2eb2203-b39e-48ef-b8be-dbaf0d8f658a</businessGroupId>
 						<username>${anypoint.username}</username>
 						<password>${anypoint.password}</password>
 						<applicationName>walmart-db</applicationName>
@@ -124,17 +124,17 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-apikit-module</artifactId>
+			<version>1.5.12</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
 			<groupId>a2eb2203-b39e-48ef-b8be-dbaf0d8f658a</groupId>
 			<artifactId>walmart-sysapi</artifactId>
 			<version>1.0.0</version>
 			<classifier>raml</classifier>
 			<type>zip</type>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-apikit-module</artifactId>
-			<version>1.5.12</version>
-			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>
 
@@ -160,7 +160,7 @@
 		<repository>
 			<id>exchange-v2</id>
 			<name>Anypoint Platform Exchange Repository</name>
-			<url>https://maven.anypoint.mulesoft.com/api/v2/organizations/bc3294e5-8e64-43af-aa37-e7857ca207dd/maven</url>
+			<url>https://maven.anypoint.mulesoft.com/api/v2/organizations/a2eb2203-b39e-48ef-b8be-dbaf0d8f658a/maven</url>
 			<layout>default</layout>
 		</repository>
 	</repositories>

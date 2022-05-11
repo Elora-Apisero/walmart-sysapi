@@ -121,6 +121,6 @@ output application/json
         </error-handler>
     </flow>
     <flow name="post:\db:application\json:walmart-sysapi-config">
-		<flow-ref doc:name="Flow Reference" doc:id="eaf9c272-2289-4dd4-aa7f-47ddd85a0ac7" name="insertToDBFlow"/>
+		<flow-ref doc:name="Flow Reference" doc:id="6715c848-c470-49e6-b7c8-31f5b54c6a04" name="insertToDBFlow"/>
     </flow>
 </mule>

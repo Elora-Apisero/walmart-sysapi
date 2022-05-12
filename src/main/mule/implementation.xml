@@ -39,5 +39,22 @@ output application/json
 			</ee:message>
 		</ee:transform>
 		<logger level="INFO" doc:name="Ending insertToDBFlowpayload" doc:id="ed4e2141-80fd-42b0-8173-a395720034ca" message="Ending /insertToDBFlowpayload"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="669459bb-42d5-4be4-9333-fc53eaa100f0" type="DB:CANNOT_REACH">
+				<ee:transform doc:name="Error Message" doc:id="b858201d-40d4-4294-abf0-4dcb4d990774" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": error.description
+}]]></ee:set-payload>
+					</ee:message>
+					<ee:variables >
+						<ee:set-variable variableName="httpStatus" ><![CDATA[500]]></ee:set-variable>
+					</ee:variables>
+				</ee:transform>
+			</on-error-propagate>
+		</error-handler>
 	</flow>
 </mule>

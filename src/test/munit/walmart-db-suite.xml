@@ -79,5 +79,32 @@ assert_expression_payload::main({payload: payload, attributes: attributes, vars:
 			</munit-tools:verify-call>
 		</munit:validation>
 	</munit:test>
-
+<munit:test name="errorTestCase-DB_CANNOT_REACH" description="Mock CONNECTIVITY error" >
+    <munit:behavior >
+        <munit-tools:mock-when processor="db:insert">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Insert to DB" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="e1e6f66a-41ce-43dc-9514-70628e4e50da" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="Database_Config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="DB:CANNOT_REACH" />
+				</munit-tools:then-return>
+        </munit-tools:mock-when>
+    </munit:behavior>
+    <munit:execution >
+        <try>
+            <flow-ref name="insertToDBFlow" doc:id="b5bf55b5-d7f9-4077-8fc1-167c0b3d50a4" doc:name="insertToDBFlow"/>
+            <error-handler >
+                <on-error-continue type="DB:CANNOT_REACH" enableNotifications="true" logException="true">
+						<logger level="INFO" doc:name="Continue" doc:id="5b3bab3b-0bf0-48f3-b44b-c02f8a868f6f" message="Continue..."/>
+					</on-error-continue>
+            </error-handler>
+        </try>
+    </munit:execution>
+    <munit:validation >
+        <munit-tools:assert-that doc:name="Assert that" doc:id="ce85076a-27eb-4760-84f1-8748681796a8" is="#[MunitTools::equalTo(500)]" expression="#[vars.httpStatus]"/>
+			<munit-tools:verify-call processor="mule:logger"/>
+    </munit:validation>
+</munit:test>
 </mule>

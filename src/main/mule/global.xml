@@ -13,5 +13,5 @@ http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/m
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
 	<configuration-properties doc:name="Configuration properties" doc:id="bdb4c65c-c2b7-4ef6-8751-3ca8f95f5b37" file="config.yaml" />
-	<api-gateway:autodiscovery apiId="17823774" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="c001ed25-a912-4f29-a093-afb91c930ec1" flowRef="walmart-sysapi-main" />
+	<api-gateway:autodiscovery apiId="17823774" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="ee8cfa09-02a3-468b-9955-f23d561967fb" flowRef="walmart-sysapi-main" />
 </mule>

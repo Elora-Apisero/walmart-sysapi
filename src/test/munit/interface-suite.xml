@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="interface-suite.xml" />
+	<munit:test name="walmart-sysapi-main-success" doc:id="fae54455-1225-433e-96cc-99f05f514ccc" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="860abbc7-031b-4ed9-9e81-1655a8c5647d" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://walmartsysapimainsuccess/set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://walmartsysapimainsuccess/set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to walmart-sysapi-main" doc:id="637de1a8-e17c-46b2-a7e7-7ca3613b282d" name="walmart-sysapi-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="9b94e536-ba27-4656-a181-a14269cf512b" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import walmartsysapimainsuccess::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+			<munit-tools:verify-call doc:name="Verify APIkit Router" doc:id="7ba9135f-3893-4116-b2c0-d3cf1fe41207" processor="apikit:router" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="8ca0e410-e91e-437d-aa65-b3fa24fcaf35" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="post:\db:application\json:walmart-sysapi-config-success" doc:id="68f38088-bbd1-418a-9fd6-9093e6f7a667" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="648d43f8-efe4-4237-b808-114377037b58" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://postdbapplicationjsonwalmartsysapiconfigsuccess/set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://postdbapplicationjsonwalmartsysapiconfigsuccess/set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://postdbapplicationjsonwalmartsysapiconfigsuccess/set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to post:\db:application\json:walmart-sysapi-config" doc:id="9a7ee0f4-55ab-4a90-9a5e-76517a318de8" name="post:\db:application\json:walmart-sysapi-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="b3013e6d-3ed8-4cc4-b481-2698d5d93732" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import postdbapplicationjsonwalmartsysapiconfigsuccess::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+			<munit-tools:verify-call doc:name="Verify Flow Reference" doc:id="5c366f89-452c-4a6d-a4ed-fa4a61617892" processor="flow-ref" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="6715c848-c470-49e6-b7c8-31f5b54c6a04" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="walmart-sysapi-console-success" doc:id="eb4ffc15-851e-43d8-a2f4-72392d883613" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="70b62e7a-3530-4538-a23c-514730d08f62" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://walmartsysapiconsolesuccess/set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://walmartsysapiconsolesuccess/set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to walmart-sysapi-console" doc:id="2fbe85e9-2143-4284-ba0b-df5632300096" name="walmart-sysapi-console"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="23d64222-bba2-4cd8-bed0-0ca0700ee538" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import walmartsysapiconsolesuccess::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+			<munit-tools:verify-call doc:name="Verify APIkit Console" doc:id="7445527f-5890-4ad2-bd2c-c442fc66d882" processor="apikit:console" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="eeaabb66-82da-4777-baf9-e2836d600aa0" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+<munit:test name="apiRouter-APIKIT_BAD_REQUEST" description="Mock CONNECTIVITY error" >
+    <munit:behavior >
+        <munit-tools:mock-when processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="walmart-sysapi-config" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="8ca0e410-e91e-437d-aa65-b3fa24fcaf35" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:BAD_REQUEST" />
+				</munit-tools:then-return>
+        </munit-tools:mock-when>
+    </munit:behavior>
+    <munit:execution >
+        <try>
+            <flow-ref name="walmart-sysapi-main" doc:id="83fbe3c3-948e-4237-a84c-6b5144ea9339" doc:name="walmart-sysapi-main"/>
+            <error-handler >
+                <on-error-continue type="APIKIT:BAD_REQUEST" enableNotifications="true" logException="true">
+						<logger level="INFO" doc:name="Continue" doc:id="4935d79b-2514-4da8-8859-3bc7f33c1293" message="Continue..."/>
+					</on-error-continue>
+            </error-handler>
+        </try>
+    </munit:execution>
+    <munit:validation >
+        <munit-tools:assert-that doc:name="Assert that" doc:id="31200ee9-1f7d-46a7-bb22-48d4b278664f" expression="#[vars.httpStatus]" is="#[MunitTools::equalTo(400)]"/>
+			<munit-tools:verify-call processor="mule:logger"/>
+    </munit:validation>
+</munit:test>
+<munit:test name="apiRouter-APIKIT_NOT_FOUND" description="Mock CONNECTIVITY error" >
+    <munit:behavior >
+        <munit-tools:mock-when processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="walmart-sysapi-config" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="8ca0e410-e91e-437d-aa65-b3fa24fcaf35" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+				</munit-tools:then-return>
+        </munit-tools:mock-when>
+    </munit:behavior>
+    <munit:execution >
+        <try>
+            <flow-ref name="walmart-sysapi-main" doc:id="2b0ed079-c646-497c-b419-b6d6700a05a8" doc:name="walmart-sysapi-main"/>
+            <error-handler >
+                <on-error-continue type="APIKIT:NOT_FOUND" enableNotifications="true" logException="true">
+						<logger level="INFO" doc:name="Continue" doc:id="9c3f0227-382b-49e5-a62e-ce25e9186e20" message="Continue..."/>
+					</on-error-continue>
+            </error-handler>
+        </try>
+    </munit:execution>
+    <munit:validation >
+        <munit-tools:assert-that doc:name="Assert that" doc:id="4a906969-6993-430d-a98b-bb39ccea51c3" expression="#[vars.httpStatus]" is="#[MunitTools::equalTo(404)]"/>
+			<munit-tools:verify-call processor="mule:logger"/>
+    </munit:validation>
+</munit:test>
+<munit:test name="apiRouter-APIKIT_METHOD_NOT_ALLOWED" description="Mock CONNECTIVITY error" >
+    <munit:behavior >
+        <munit-tools:mock-when processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="walmart-sysapi-config" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="8ca0e410-e91e-437d-aa65-b3fa24fcaf35" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:METHOD_NOT_ALLOWED" />
+				</munit-tools:then-return>
+        </munit-tools:mock-when>
+    </munit:behavior>
+    <munit:execution >
+        <try>
+            <flow-ref name="walmart-sysapi-main" doc:id="9820e0f7-51de-414c-a50a-83e6f5d8633a" doc:name="walmart-sysapi-main"/>
+            <error-handler >
+                <on-error-continue type="APIKIT:METHOD_NOT_ALLOWED" enableNotifications="true" logException="true">
+						<logger level="INFO" doc:name="Continue" doc:id="bd2a1ec1-2c71-4416-a578-9e05c21a4ff3" message="Continue..."/>
+					</on-error-continue>
+            </error-handler>
+        </try>
+    </munit:execution>
+    <munit:validation >
+        <munit-tools:assert-that doc:name="Assert that" doc:id="ad51353c-2680-42fd-b209-0384fcb5e9db" expression="#[vars.httpStatus]" is="#[MunitTools::equalTo(405)]"/>
+			<munit-tools:verify-call processor="mule:logger"/>
+    </munit:validation>
+</munit:test>
+<munit:test name="apiRouter-APIKIT_NOT_ACCEPTABLE" description="Mock CONNECTIVITY error" >
+    <munit:behavior >
+        <munit-tools:mock-when processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="walmart-sysapi-config" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="8ca0e410-e91e-437d-aa65-b3fa24fcaf35" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_ACCEPTABLE" />
+				</munit-tools:then-return>
+        </munit-tools:mock-when>
+    </munit:behavior>
+    <munit:execution >
+        <try>
+            <flow-ref name="walmart-sysapi-main" doc:id="550563d0-b9d0-40a1-bff4-05b20f47a38d" doc:name="walmart-sysapi-main"/>
+            <error-handler >
+                <on-error-continue type="APIKIT:NOT_ACCEPTABLE" enableNotifications="true" logException="true">
+						<logger level="INFO" doc:name="Continue" doc:id="019d1948-a105-4044-9c68-47deb7dcc500" message="Continue..."/>
+					</on-error-continue>
+            </error-handler>
+        </try>
+    </munit:execution>
+    <munit:validation >
+        <munit-tools:assert-that doc:name="Assert that" doc:id="fdc57611-0621-414f-87e1-3b25bc853e4e" expression="#[vars.httpStatus]" is="#[MunitTools::equalTo(406)]"/>
+			<munit-tools:verify-call processor="mule:logger"/>
+    </munit:validation>
+</munit:test>
+<munit:test name="apiRouter-APIKIT_UNSUPPORTED_MEDIA_TYPE" description="Mock CONNECTIVITY error" >
+    <munit:behavior >
+        <munit-tools:mock-when processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="walmart-sysapi-config" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="8ca0e410-e91e-437d-aa65-b3fa24fcaf35" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
+				</munit-tools:then-return>
+        </munit-tools:mock-when>
+    </munit:behavior>
+    <munit:execution >
+        <try>
+            <flow-ref name="walmart-sysapi-main" doc:id="a2469773-5f03-48b4-a37e-8ac18e9faad2" doc:name="walmart-sysapi-main"/>
+            <error-handler >
+                <on-error-continue type="APIKIT:UNSUPPORTED_MEDIA_TYPE" enableNotifications="true" logException="true">
+						<logger level="INFO" doc:name="Continue" doc:id="317bd192-f7ca-4b38-8a85-fffef906c67b" message="Continue..."/>
+					</on-error-continue>
+            </error-handler>
+        </try>
+    </munit:execution>
+    <munit:validation >
+        <munit-tools:assert-that doc:name="Assert that" doc:id="02a948e1-d8c3-4be8-8885-7be23d52c444" expression="#[vars.httpStatus]" is="#[MunitTools::equalTo(415)]"/>
+			<munit-tools:verify-call processor="mule:logger"/>
+    </munit:validation>
+</munit:test>
+<munit:test name="apiRouter-APIKIT_NOT_IMPLEMENTED" description="Mock CONNECTIVITY error" >
+    <munit:behavior >
+        <munit-tools:mock-when processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="walmart-sysapi-config" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="8ca0e410-e91e-437d-aa65-b3fa24fcaf35" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_IMPLEMENTED" />
+				</munit-tools:then-return>
+        </munit-tools:mock-when>
+    </munit:behavior>
+    <munit:execution >
+        <try>
+            <flow-ref name="walmart-sysapi-main" doc:id="3c831789-ad0a-46b0-a4ba-a01272609e18" doc:name="walmart-sysapi-main"/>
+            <error-handler >
+                <on-error-continue type="APIKIT:NOT_IMPLEMENTED" enableNotifications="true" logException="true">
+						<logger level="INFO" doc:name="Continue" doc:id="48f4a9fb-4064-447f-be59-143af6f0ea76" message="Continue..."/>
+					</on-error-continue>
+            </error-handler>
+        </try>
+    </munit:execution>
+    <munit:validation >
+        <munit-tools:assert-that doc:name="Assert that" doc:id="4fb1f865-7123-4510-a45f-655f061514b0" is="#[MunitTools::equalTo(501)]" expression="#[vars.httpStatus]"/>
+			<munit-tools:verify-call processor="mule:logger"/>
+    </munit:validation>
+</munit:test>
+<munit:test name="apiConsole-APIKIT_NOT_FOUND" description="Mock CONNECTIVITY error" >
+    <munit:behavior >
+        <munit-tools:mock-when processor="apikit:console">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="walmart-sysapi-config" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="eeaabb66-82da-4777-baf9-e2836d600aa0" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+				</munit-tools:then-return>
+        </munit-tools:mock-when>
+    </munit:behavior>
+    <munit:execution >
+        <try>
+            <flow-ref name="walmart-sysapi-console" doc:id="61b80bea-c58c-4419-a8a8-71c827c32c53" doc:name="walmart-sysapi-console"/>
+            <error-handler >
+                <on-error-continue type="APIKIT:NOT_FOUND" enableNotifications="true" logException="true">
+						<logger level="INFO" doc:name="Continue" doc:id="178c24c5-b1fb-4e42-933d-daf2a7a8938b" message="Continue..."/>
+					</on-error-continue>
+            </error-handler>
+        </try>
+    </munit:execution>
+    <munit:validation >
+        <munit-tools:assert-that doc:name="Assert that" doc:id="c48a53e0-617e-4e4c-b009-744aa08a981c" is="#[MunitTools::equalTo(404)]" expression="#[vars.httpStatus]"/>
+			<munit-tools:verify-call processor="mule:logger"/>
+    </munit:validation>
+</munit:test>
+</mule>
